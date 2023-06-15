@@ -15,6 +15,7 @@ public class ABoardVO {
 	private String id;
 	private String loca;
 	private String nick;
+	private int cnt_reply;
 	
 	public int getA_bno() {
 		return a_bno;
@@ -82,12 +83,18 @@ public class ABoardVO {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	public int getCnt_reply() {
+		return cnt_reply;
+	}
+	public void setCnt_reply(int cnt_reply) {
+		this.cnt_reply = cnt_reply;
+	}
 	
 	@Override
 	public String toString() {
 		return "ABoardVO [a_bno=" + a_bno + ", a_title=" + a_title + ", a_content=" + a_content + ", a_image=" + a_image
 				+ ", a_regdate=" + a_regdate + ", a_like_cnt=" + a_like_cnt + ", a_cnt=" + a_cnt + ", a_type=" + a_type
-				+ ", id=" + id + ", loca=" + loca + ", nick=" + nick + "]";
+				+ ", id=" + id + ", loca=" + loca + ", nick=" + nick + ", cnt_reply=" + cnt_reply + "]";
 	}
 
 	

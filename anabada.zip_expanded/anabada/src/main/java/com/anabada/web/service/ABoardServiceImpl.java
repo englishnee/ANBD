@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.anabada.web.dao.ABoardDAO;
 import com.anabada.web.vo.ABoardVO;
 import com.anabada.web.vo.ALikeVO;
+import com.anabada.web.vo.AReplyVO;
 import com.anabada.web.vo.ASearchCriteria;
 import com.anabada.web.vo.ComplaintVO;
 
@@ -90,6 +91,12 @@ public class ABoardServiceImpl implements ABoardService {
 	@Override
 	public int complaintChk(Map<String, String> comChk) throws Exception {
 		return dao.complaintChk(comChk);
+	}
+
+	//게시글 상세보기에서 댓글 달면 댓글 개수 업데이트
+	@Override
+	public void updateReplyCount(int a_bno) throws Exception {
+		dao.updateReplyCount(a_bno);
 	}
 
 
