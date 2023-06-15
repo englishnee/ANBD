@@ -95,9 +95,15 @@
 	<table>
 		<tr>
 			<td>
-				<label class="chk"><input type="radio" id="life" name="a_type" value="1"/><span>동네 생활</span></label>
-				<label class="chk"><input type="radio" id="food" name="a_type" value="2"/><span>동네 맛집</span></label>
-				<label class="chk"><input type="radio" id="with" name="a_type" value="3"/><span>같이 해요</span></label>
+				 <label class="chk"> 
+            		<input type="radio" id="cate" name="a_type" value="1"<c:out value="${update.a_type eq '1' ? 'checked' : ''}"/>/><span>동네생활</span>
+         		 </label>
+         		 <label class="chk">        
+            		<input type="radio" id="cate" name="a_type" value="2"<c:out value="${update.a_type eq '2' ? 'checked' : ''}"/>/><span>동네맛집</span>
+         		 </label>
+         		 <label class="chk">
+            		<input type="radio" id="cate" name="a_type" value="3"<c:out value="${update.a_type eq '3' ? 'checked' : ''}"/>/><span>같이해요</span>
+         		 </label>
 			</td>
 		</tr>
 		
@@ -105,18 +111,18 @@
 			<td>
 				<br>
 				<select id="loca" name="loca" class="form-select form-select-sm">
-					<option value="1">강원</option>
-					<option value="2">경기</option>
-					<option value="3">경남</option>
-					<option value="4">경북</option>
-					<option value="5">부산</option>
-					<option value="6">서울</option>
-					<option value="7">인천</option>
-					<option value="8">전남</option>
-					<option value="9">전북</option>
-					<option value="10">제주</option>
-					<option value="11">충남</option>
-					<option value="12">충북</option>
+					<option value="1"<c:out value="${update.loca eq '1' ? 'selected' : ''}"/>/><span>강원</span>
+					<option value="2"<c:out value="${update.loca eq '2' ? 'selected' : ''}"/>/><span>경기</span>
+					<option value="3"<c:out value="${update.loca eq '3' ? 'selected' : ''}"/>/><span>경남</span>
+					<option value="4"<c:out value="${update.loca eq '4' ? 'selected' : ''}"/>/><span>경북</span>
+					<option value="5"<c:out value="${update.loca eq '5' ? 'selected' : ''}"/>/><span>부산</span>
+					<option value="6"<c:out value="${update.loca eq '6' ? 'selected' : ''}"/>/><span>서울</span>
+					<option value="7"<c:out value="${update.loca eq '7' ? 'selected' : ''}"/>/><span>인천</span>
+					<option value="8"<c:out value="${update.loca eq '8' ? 'selected' : ''}"/>/><span>전남</span>
+					<option value="9"<c:out value="${update.loca eq '9' ? 'selected' : ''}"/>/><span>전북</span>
+					<option value="10"<c:out value="${update.loca eq '10' ? 'selected' : ''}"/>/><span>제주</span>
+					<option value="11"<c:out value="${update.loca eq '11' ? 'selected' : ''}"/>/><span>충남</span>
+					<option value="12"<c:out value="${update.loca eq '12' ? 'selected' : ''}"/>/><span>충북</span>
 				</select>
 				<br>
 			</td>
@@ -129,15 +135,19 @@
 			</td>
 		</tr>
 		
+		
 		<tr>
 			<td>
+				<br>
 				<label for="a_content" class="form-label">내용</label>
 				<textarea id="content" name="a_content" placeholder="내용을 입력해주세요."><c:out value="${update.a_content }"/></textarea>
-			<script type="text/javascript">
-				CKEDITOR.replace('a_content', {filebrowserUploadUrl: '/a_board/fileUpload', width:930, height:300});
-			</script>
+				<script type="text/javascript">
+					CKEDITOR.replace('content', {filebrowserUploadUrl: '/a_board/fileUpload', 
+					enterMode: CKEDITOR.ENTER_BR,
+					shiftEnterMode: CKEDITOR.ENTER_P,
+					width:930, height:300});
+				</script>
 			</td>
-			
 		</tr>
 		
 		<tr>
