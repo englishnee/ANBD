@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.anabada.web.vo.ABoardVO;
+import com.anabada.web.vo.AReplyVO;
 import com.anabada.web.vo.ASearchCriteria;
 import com.anabada.web.vo.ComplaintVO;
 
@@ -95,6 +96,12 @@ public class ABoardDAOImpl implements ABoardDAO {
 	@Override
 	public int complaintChk(Map<String, String> comChk) {
 		return sqlSession.selectOne("boardMapper.complaintChk", comChk);
+	}
+
+	//게시글 상세보기에서 댓글 달면 댓글 개수 업데이트
+	@Override
+	public void updateReplyCount(int a_bno) throws Exception {
+		sqlSession.update("boardMapper.updateReplyCount", a_bno);
 	}
 
 

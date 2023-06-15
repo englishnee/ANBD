@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.anabada.web.vo.ABoardVO;
+import com.anabada.web.vo.AReplyVO;
 import com.anabada.web.vo.ASearchCriteria;
 import com.anabada.web.vo.ComplaintVO;
 
@@ -44,6 +45,9 @@ public interface ABoardService {
 
 	//신고 유효성 검사
 	public int complaintChk(Map<String, String> comChk) throws Exception;
+
+	//게시글 상세보기에서 댓글 달면 댓글 개수 업데이트
+	public void updateReplyCount(int a_bno) throws Exception;
 
 
 }

@@ -204,7 +204,7 @@ public class ABoardController {
 
    // 게시판 목록
    @RequestMapping(value = "/list", method = RequestMethod.GET)
-   public String list(Model model, @ModelAttribute("scri") ASearchCriteria scri, HttpServletRequest req,
+   public String list(Model model, AReplyVO replyVO, @ModelAttribute("scri") ASearchCriteria scri, HttpServletRequest req,
          @RequestParam(value = "loca", required = false) String loca) throws Exception {
 
       logger.info("게시판 목록 보기");
@@ -216,7 +216,7 @@ public class ABoardController {
       pageMaker.setTotalCount(service.listCount(scri));
 
       model.addAttribute("pageMaker", pageMaker);
-
+      
       return "/a_board/list";
    }
 
@@ -264,6 +264,8 @@ public class ABoardController {
 
       List<AReplyVO> replyList = replyService.readReply(boardVO.getA_bno());
       model.addAttribute("replyList", replyList);
+      
+      service.updateReplyCount(boardVO.getA_bno());
 
       Map<String, String> likeChk = new HashMap<>();
 

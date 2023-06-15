@@ -11,9 +11,9 @@ VALUES(A_BOARD_SEQ.NEXTVAL, #{a_title}, #{a_content}, #{a_type}, #{id}, #{loca},
 </insert>
 
 <select id="list" parameterType="com.anabada.web.vo.ASearchCriteria" resultType="boardVO">
-SELECT A_BNO, A_TITLE, A_REGDATE, A_CNT, A_TYPE, ID, LOCA, NICK
+SELECT A_BNO, A_TITLE, A_REGDATE, A_CNT, A_TYPE, ID, LOCA, NICK, CNT_REPLY
 FROM (
-	SELECT A_BNO, A_TITLE, A_REGDATE, A_CNT, A_TYPE, ID, LOCA, NICK, ROW_NUMBER()
+	SELECT A_BNO, A_TITLE, A_REGDATE, A_CNT, A_TYPE, ID, LOCA, NICK, CNT_REPLY, ROW_NUMBER()
 	OVER(ORDER BY A_BNO DESC) AS RNUM
 	FROM A_BOARD WHERE 1 = 1
 	<include refid="search"></include>
@@ -73,7 +73,7 @@ AND A_BNO > 0
 </update>
 
 <select id="read" parameterType="int" resultType="boardVO">
-	SELECT A_BNO, A_TITLE, A_CONTENT, A_REGDATE, ID, NICK, A_LIKE_CNT, A_TYPE
+	SELECT A_BNO, A_TITLE, A_CONTENT, A_REGDATE, ID, NICK, A_LIKE_CNT, A_TYPE, LOCA
 	FROM A_BOARD
 	WHERE A_BNO = #{a_bno}
 </select>
@@ -115,11 +115,21 @@ WHERE A_BNO = #{a_bno}
 </select>
 
 <select id="deleteChk" parameterType="int" resultType="int">
-SELECT COUNT(*) FROM A_BOARD WHERE A_BNO = #{a_bno}
+SELECT COUNT(*) 
+FROM A_BOARD 
+WHERE A_BNO = #{a_bno}
 </select>
 
 <select id="complaintChk" parameterType="java.util.HashMap" resultType="int">
-SELECT COUNT(*) FROM COMPLAINT WHERE ID = #{id} AND C_BNO = #{c_bno} AND BOARD_TYPE = 'a_board'
+SELECT COUNT(*) 
+FROM COMPLAINT 
+WHERE ID = #{id} AND C_BNO = #{c_bno} AND BOARD_TYPE = 'a_board'
 </select>
+
+<update id="updateReplyCount" parameterType="int">
+UPDATE A_BOARD A 
+SET A.CNT_REPLY = (SELECT COUNT(R_RNO) FROM A_REPLY WHERE A_BNO = #{a_bno}) 
+WHERE A.A_BNO = #{a_bno}
+</update>
 
 </mapper>

@@ -41,6 +41,7 @@
    width:50px;
    height:31px;
 }
+
 </style>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -107,8 +108,6 @@
 		}
 	}
 	/* 글 작성 로그인 유효성 검사 끝 */
-	
-	
 	
 </script>
 </head>
@@ -248,9 +247,12 @@
                </c:choose>            
             </td>
             <td class="delChk">
-               <a href="/a_board/readView?a_bno=${list.a_bno}&page=${scri.page }&perPageNum=${scri.perPageNum }&searchType=${scri.searchType }&keyword=${scri.keyword }&cateType=${scri.cateType }">
+               <a href="/a_board/readView?a_bno=${list.a_bno}&page=${scri.page }&perPageNum=${scri.perPageNum }&searchType=${scri.searchType }&keyword=${scri.keyword }&cateType=${scri.cateType }&locaType=${scri.locaType}">
                <c:out value="${list.a_title }"/>
                </a>
+               <c:if test="${list.cnt_reply != 0 }">
+               	 <span style="font-size:9pt;"><b>[<c:out value="${list.cnt_reply }"/>]</b></span>
+               </c:if>
             </td>
             <td><c:out value="${list.nick }"/></td>
             <td><fmt:formatDate value="${list.a_regdate }" pattern="yyyy-MM-dd"/></td>

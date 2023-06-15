@@ -244,9 +244,12 @@
                </c:choose>            
             </td>
             <td class="delChk">
-               <a href="/a_board/readView?a_bno=${list.a_bno}&page=${scri.page }&perPageNum=${scri.perPageNum }&searchType=${scri.searchType }&keyword=${scri.keyword }&cateType=${scri.cateType }">
+               <a href="/a_board/readView?a_bno=${list.a_bno}&page=${scri.page }&perPageNum=${scri.perPageNum }&searchType=${scri.searchType }&keyword=${scri.keyword }&cateType=${scri.cateType }&locaType=${scri.locaType}">
                <c:out value="${list.a_title }"/>
                </a>
+               <c:if test="${list.cnt_reply != 0 }">
+               	 <span style="font-size:9pt;"><b>[<c:out value="${list.cnt_reply }"/>]</b></span>
+               </c:if>
             </td>
             <td><c:out value="${list.nick }"/></td>
             <td><fmt:formatDate value="${list.a_regdate }" pattern="yyyy-MM-dd"/></td>
@@ -276,6 +279,7 @@
     	</div>
    
    		<div class="col-md-4">
+   			<input type="text" name="loca" value="${scri.locaType }" style="display:none;"/>
       		<input type="text" name="keyword" id="keywordInput" class="form-control form-control-sm" value="${scri.keyword }"/>
    		</div>
    
@@ -295,11 +299,11 @@
                      
          <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
             <c:out value="${pageMaker.cri.page == idx ? '' : '' }"/>
-               <a href="list${pageMaker.makeSearch(idx)}">${idx }</a>
+               <a href="loca_list${pageMaker.makeSearch(idx)}">${idx }</a>
          </c:forEach>
                   
          <c:if test="${pageMaker.next && pageMakerendPage > 0 }">
-            <a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a>
+            <a href="loca_list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a>
          </c:if>
    </div>
    <!-- 페이징 처리 끝 -->
