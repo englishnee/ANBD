@@ -294,7 +294,7 @@
    <!-- 페이징 처리 -->
    <div style="text-align:center;">
          <c:if test="${pageMaker.prev }">
-            <a href="list${pageMaker.makeSearch(pageMaker.startPage - 1 )}">이전</a>
+            <a href="loca_list${pageMaker.makeSearch(pageMaker.startPage - 1 )}">이전</a>
          </c:if>
                      
          <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">

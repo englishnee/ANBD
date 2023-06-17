@@ -7,10 +7,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 작성한 게시글 목록</title>
+<title>내가 쓴 게시글 목록</title>
 <link rel="stylesheet" href="<c:url value='/css/r_styles.css'/>">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<style>
+#delBtn {
+   display:inline-block;
+   padding:4px 4px;
+   border:1px solid #AEB6BF;
+   border-radius:6px;
+   background-color:white;
+   text-align:center;
+   cursor:pointer;
+   font-size:14px;
+   width:45px;
+   height:30px;
+   float:right;
+}
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 체크 박스 전체 선택 */
+/* $(function() {
+	$(".allDel").click(function() {
+		if($(".allDel").is(":checked")) {
+			$("input[name=NChk]").prop("checked", true);	
+		}
+		else {
+			$("input[name=NChk]").prop("checked", false);
+		}
+	});
+	
+	$("#delBtn").click(function() {
+		
+		if($("input[name=NChk]").is(":checked") == false) {
+			alert("삭제할 게시글을 선택하세요.");
+			return;
+		}
+		
+		if(confirm("게시글을 삭제하시겠습니까?")) {
+			
+			var delArr = new Array(); //삭제될 게시글 번호 담음
+			
+			$("input[name=NChk]:checked").each(function(i) {
+				delArr.push($(this).val());
+			});
+			
+			$.ajax({
+				url: "a_board/myWriteListDelete",
+				type: "GET",
+				data: {delArr: delArr},
+				success: function(data) {
+					alert("삭제되었습니다.");
+					window.location.reload();
+				}
+			});
+		}
+		else {
+			return;
+		}
+	});
+}); */
+
+</script>
 </head>
+
 <body>
 
 <div>
@@ -23,9 +84,18 @@
 <jsp:include page="/WEB-INF/views/includes/myPageHeader.jsp" />			
 
 <div class="aboardcon">
- <table class="table">
+	<div class="row justify-content-center">
+		<h5>내가 쓴 게시글</h5> 
+		<!-- <h5 class="col-md-11">내가 쓴 게시글</h5> 
+	 	<input type="button" id="delBtn" name="delBtn" value="삭제" class="col-md-20"/> -->
+	</div>
+ 	
+ 	<br>
+ 	
+ 	<table class="table">
       <thead>
          <tr>
+         <!-- <th scope="col"><input type="checkbox" id="delchk" name="delchk" class="allDel"/></th> -->
          <th scope="col">지역</th>
          <th scope="col">말머리</th>
          <th scope="col">제목</th>
@@ -38,6 +108,9 @@
   	<!-- 게시글 목록 -->
       <c:forEach items="${myWriteList }" var="myWriteList" varStatus="status">
          <tr>
+         	<!-- <td>
+         	<input type="checkbox" id="NChk" name="NChk"/>
+         	</td> -->
             <td>
                <input type="hidden" id="a_bno" name="a_bno" value="${myWriteList.a_bno }"/>
             	<c:choose>
@@ -111,20 +184,20 @@
     <!-- 페이징 처리 -->
    <div style="text-align:center;">
          <c:if test="${pageMaker.prev }">
-            <a href="list${pageMaker.makeSearch(pageMaker.startPage - 1 )}">이전</a>
+            <a href="myWriteList${pageMaker.mymakeSearch(pageMaker.startPage - 1 )}">이전</a>
          </c:if>
                      
          <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
             <c:out value="${pageMaker.cri.page == idx ? '' : '' }"/>
-               <a href="list${pageMaker.makeSearch(idx)}">${idx }</a>
+               <a href="myWriteList${pageMaker.mymakeSearch(idx)}">${idx }</a>
          </c:forEach>
                   
          <c:if test="${pageMaker.next && pageMakerendPage > 0 }">
-            <a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a>
+            <a href="myWriteList${pageMaker.mymakeSearch(pageMaker.endPage + 1)}">다음</a>
          </c:if>
    </div>
-  </div>
    <!-- 페이징 처리 끝 -->
+   </div>
   </form>
 </section>
 

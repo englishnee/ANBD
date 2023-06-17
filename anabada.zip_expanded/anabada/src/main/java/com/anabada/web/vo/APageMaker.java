@@ -106,4 +106,38 @@ public class APageMaker {
 		}
 	}
 	
+	
+		//커뮤니티 마이페이지 페이징 처리
+		private int myGetTotalCount;
+		
+		public int getMyGetTotalCount() {
+			return myGetTotalCount;
+		}
+		public void setMyGetTotalCount(int myGetTotalCount) {
+			this.myGetTotalCount = myGetTotalCount;
+		}
+		
+		
+		private void mycalcData() {
+			endPage = (int)(Math.ceil(cri.getPage() / (double)displayPageNum) * displayPageNum);
+			startPage = (endPage - displayPageNum) + 1;
+			
+			int tempEndPage = (int)(Math.ceil(myGetTotalCount / (double)cri.getPerPageNum()));
+			
+			if (endPage > tempEndPage) {
+				endPage = tempEndPage;
+				
+			}
+			prev = startPage == 1 ? false : true;
+			next = endPage * cri.getPerPageNum() >= myGetTotalCount ? false : true;
+		}
+		
+		public String mymakeSearch(int page) {
+			UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+																			.queryParam("perPageNum", cri.getPerPageNum())
+																			.build();
+			
+			return uriComponents.toUriString();
+		}
+	
 }
